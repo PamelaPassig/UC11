@@ -67,7 +67,6 @@ public class ProdutosDAO {
     ArrayList<ProdutosDTO> lista = new ArrayList<>();
     String sql = "SELECT * FROM produtos WHERE situacao = 'Vendido'";
     conn = new conectaDAO().connectDB();
-
     try {
         prep = conn.prepareStatement(sql);
         resultset = prep.executeQuery();
