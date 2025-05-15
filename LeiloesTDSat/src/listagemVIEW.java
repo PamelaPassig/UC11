@@ -7,9 +7,28 @@ public class listagemVIEW extends javax.swing.JFrame {
 
     public listagemVIEW() {
         initComponents();
-        carregarProdutosNaTabela();
+        listarProdutos();
     }
+private void carregarProdutosNaTabela() {
+        try {
+            ProdutosDAO dao = new ProdutosDAO();
+            ArrayList<ProdutosDTO> lista = dao.listarProdutos();
 
+            DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel(); 
+            model.setRowCount(0); 
+
+            for (ProdutosDTO p : lista) {
+                model.addRow(new Object[]{
+                    p.getId(),
+                    p.getNome(),
+                    p.getValor(),
+                    p.getSituacao()
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar produtos: " + e.getMessage());
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -118,28 +137,9 @@ public class listagemVIEW extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private void carregarProdutosNaTabela() {
-        try {
-            ProdutosDAO dao = new ProdutosDAO();
-            ArrayList<ProdutosDTO> lista = dao.listarProdutos();
 
-            DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel(); 
-            model.setRowCount(0); 
-
-            for (ProdutosDTO p : lista) {
-                model.addRow(new Object[]{
-                    p.getId(),
-                    p.getNome(),
-                    p.getValor(),
-                    p.getSituacao()
-                });
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar produtos: " + e.getMessage());
-        }
-    }
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        try {
+try {
             int id = Integer.parseInt(id_produto_venda.getText());
             ProdutosDAO dao = new ProdutosDAO();
             dao.venderProduto(id);
