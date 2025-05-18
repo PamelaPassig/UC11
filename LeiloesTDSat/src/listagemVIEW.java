@@ -143,31 +143,15 @@ try {
             int id = Integer.parseInt(id_produto_venda.getText());
             ProdutosDAO dao = new ProdutosDAO();
             dao.venderProduto(id);
-            carregarProdutosNaTabela();
+            listarProdutos();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Digite um ID válido.");
         }
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        try {
-            ProdutosDAO dao = new ProdutosDAO();
-            ArrayList<ProdutosDTO> lista = dao.listarVendidos();
-
-            DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel();
-            model.setRowCount(0);
-
-            for (ProdutosDTO p : lista) {
-                model.addRow(new Object[]{
-                    p.getId(),
-                    p.getNome(),
-                    p.getValor(),
-                    p.getSituacao()
-                });
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao consultar vendidos: " + e.getMessage());
-        }
+        vendasVIEW vendas = new vendasVIEW();
+        vendas.setVisible(true);  
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -227,17 +211,18 @@ try {
             DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel();
             model.setNumRows(0);
             
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
+            ArrayList<ProdutosDTO> lista = produtosdao.listarProdutos();
             
-            for(int i = 0; i < listagem.size(); i++){
-                model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getValor(),
-                    listagem.get(i).getSituacao()
-                });
+            for (ProdutosDTO p : lista) {
+            model.addRow(new Object[]{
+                p.getId(),
+                p.getNome(),
+                p.getValor(),
+                p.getSituacao()
+            });
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar produtos: " + e.getMessage());
         }
     
     }
