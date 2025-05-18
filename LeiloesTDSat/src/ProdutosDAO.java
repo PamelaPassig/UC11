@@ -40,9 +40,10 @@ public class ProdutosDAO {
     }
 }
     public ArrayList<ProdutosDTO> listarProdutos() {
+        ArrayList<ProdutosDTO> listagem = new ArrayList<>();
         String sql = "SELECT * FROM produtos";
         conn = new conectaDAO().connectDB();
-        ArrayList<ProdutosDTO> listagem = new ArrayList<>();
+        
 
         try {
             prep = conn.prepareStatement(sql);

@@ -11,7 +11,7 @@ public class vendasVIEW extends javax.swing.JFrame {
     private void listarVendidos(){
         try {
             ProdutosDAO dao = new ProdutosDAO();
-            ArrayList<ProdutosDTO> lista = dao.listarProdutosVendidos();
+            ArrayList<ProdutosDTO> lista = dao.listarVendidos();
 
             DefaultTableModel model = (DefaultTableModel) tabelaVendidos.getModel();
             model.setRowCount(0);
@@ -40,13 +40,13 @@ public class vendasVIEW extends javax.swing.JFrame {
 
         tabelaVendidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Valor"
+                "ID", "Nome", "Valor", "Situacao"
             }
         ));
         jScrollPane1.setViewportView(tabelaVendidos);

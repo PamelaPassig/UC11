@@ -33,7 +33,7 @@ public class ProdutosDTO {
         this.valor = valor;
     }
 
-    public void setSituacao(String status) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
     
